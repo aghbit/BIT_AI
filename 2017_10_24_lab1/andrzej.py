@@ -38,3 +38,6 @@ def gradient_step(x, y, w_0, w_1, alpha=0.01):
 x = np.linspace(1, 10)
 noise = np.random.normal(size=x.shape)
 y = 2 * x + 1 + noise 
+
+y_hard = 10 * np.sin(x) + 5 * x - 10 + 3 * noise
+
