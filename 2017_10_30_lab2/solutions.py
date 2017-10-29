@@ -7,32 +7,31 @@ def hypotheses(W, X):
     return result
 
 
-def cost(W, X, Y):
-    N = len(X)
+def cost(W, X, Y, reg_param=0.1):
     hypotheses = X.dot(W)
     errors = hypotheses - Y
     errors_squared = errors ** 2
-    return np.sum(errors_squared) / (2 * N)
+    return np.mean(errors_squared) / 2  # + reg_param * np.sum(W ** 2)
 
 
-def gradient_step(W, X, Y, learning_rate=0.1):
+def gradient_step(W, X, Y, reg_param=0.1, learning_rate=0.01):
     H = hypotheses(W, X)
     errors = H - Y
     epsilons = np.mean(np.transpose(np.multiply(errors, np.transpose(X))), axis=0)
     return W - epsilons * learning_rate
 
-    # return W - learning_rate * epsilons
+
+def mean_normalization(feature_matrix):
+    means = feature_matrix.mean(axis=0)
+    mins = feature_matrix.min(axis=0)
+    maxs = feature_matrix.max(axis=0)
+    ranges = maxs - mins
+    # we alter ranges and means vector so that x_0 remains unaffected
+    ranges[0] = 1
+    means[0] = 0
+    return (feature_matrix - means) / ranges
 
 
-def slow_hypothesis(W, X):
-    result = 0
-    for w, x in zip(W, X):
-        result += w * x
-    return result
-
-
-def time_of(fun, *params):
-    s = time.time()
-    fun(*params)
-    return time.time() - s
+def secret_polynomial(x):
+    return 0.5 * x ** 3 - 4*x + 6 * np.random.rand()
 
