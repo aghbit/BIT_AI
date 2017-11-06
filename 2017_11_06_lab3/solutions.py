@@ -10,20 +10,17 @@ def _hypotheses(W, X):
     return sigmoid(result)
 
 
-def cost(W, X, Y, reg_param=0.1, eps=0.01):
+def cost(W, X, Y, eps=0.01):
     hypotheses = _hypotheses(W, X)
     result = Y * np.log(hypotheses + eps) + (1 - Y) * np.log(1 - hypotheses + eps)
     result = result.mean()
     result *= -1
-    # print(result)
-    return result  # + reg_param * np.sum(W ** 2)
+    return result
 
 
-def gradient_step(W, X, Y, reg_param=0.1, learning_rate=0.01):
+def gradient_step(W, X, Y,learning_rate=0.01):
     H = _hypotheses(W, X)
-
     errors = H - Y
-    # print(errors)
     epsilons = (X.T.dot(errors)) / len(errors)
     return W - epsilons * learning_rate
 
@@ -78,3 +75,22 @@ def fpr(actual_predictions, model_predictions):
     neq = (equals == False).astype(int)
     fp = neq * model_predictions
     return fp.sum() / (fp.sum() + tn.sum())
+
+
+def cost_reg(W, X, Y, l=0.1, eps=0.01):
+    hypotheses = _hypotheses(W, X)
+    result = Y * np.log(hypotheses + eps) + (1 - Y) * np.log(1 - hypotheses + eps)
+    result = result.mean()
+    result *= -1
+    bias_mask = np.ones(W.size)
+    bias_mask[0] = 0
+    return result + (l / len(Y)) * np.sum((W ** 2) * bias_mask)
+
+
+def gradient_step_reg(W, X, Y, learning_rate=0.01, l=0.1):
+    H = _hypotheses(W, X)
+    errors = H - Y
+    bias_mask = np.ones(W.size)
+    bias_mask[0] = 0
+    epsilons = (X.T.dot(errors) + (l * W * bias_mask)) / len(errors)
+    return W - epsilons * learning_rate
