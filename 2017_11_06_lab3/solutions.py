@@ -36,6 +36,17 @@ def mean_normalization(feature_matrix):
     return (feature_matrix - means) / ranges
 
 
+def std_normalization(feature_matrix, means=None, ranges=None):
+    means = feature_matrix.mean(axis=0) if means is None else means
+    mins = feature_matrix.min(axis=0)
+    maxs = feature_matrix.max(axis=0)
+    
+    stds = feature_matrix.std(axis=0) if ranges is None else ranges
+    # we alter ranges and means vector so that x_0 remains unaffected
+    stds[0] = 1
+    means[0] = 0
+    return (feature_matrix - means) / stds, means, stds
+
 def accuracy(actual_predictions, model_predictions):
     equals = (actual_predictions == model_predictions).astype(int)
     return equals.sum() / equals.size
