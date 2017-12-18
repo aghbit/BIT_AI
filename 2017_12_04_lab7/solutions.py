@@ -36,35 +36,35 @@ def k_means_iteration(centroids, datapoints):
 
     return c_t.T, clusters
 
-
-def demonstrate_k_means(k_means_iter, num_iterations, centroids, datapoints):
-    _, clusters = k_means_iter(centroids, datapoints)
-
-    centroids_diffs = np.zeros(centroids.shape)
-    for i in range(num_iterations):
-        prev_centroids = centroids
-        centroids, clusters = k_means_iter(centroids, datapoints)
-        centroids_diffs = centroids - prev_centroids
-
-    for c in clusters:
-        plt.scatter(datapoints[:, 0][c], datapoints[:, 1][c])
-
-    plt.scatter(centroids[:, 0], centroids[:, 1], color='black', marker='.')
-    print(centroids_diffs)
-    plt.show()
-
-
-def k_means_img_compression(k_means_iter, num_iterations, centroids, image):
-    datapoints = np.copy(image.reshape(-1, 3))
-    _, clusters = k_means_iter(centroids, datapoints)
-    for i in range(num_iterations):
-        centroids, clusters = k_means_iter(centroids, datapoints)
-
-    for i in range(len(clusters)):
-        datapoints[clusters[i]] = centroids[i]
-    img_reconstructed = datapoints.reshape(image.shape)
-    print(num_iterations)
-    plt.imshow(image[:, :, [2, 1, 0]])
-    plt.show()
-    plt.imshow(img_reconstructed[:, :, [2, 1, 0]])
-    plt.show()
+#
+# def demonstrate_k_means(k_means_iter, num_iterations, centroids, datapoints):
+#     _, clusters = k_means_iter(centroids, datapoints)
+#
+#     centroids_diffs = np.zeros(centroids.shape)
+#     for i in range(num_iterations):
+#         prev_centroids = centroids
+#         centroids, clusters = k_means_iter(centroids, datapoints)
+#         centroids_diffs = centroids - prev_centroids
+#
+#     for c in clusters:
+#         plt.scatter(datapoints[:, 0][c], datapoints[:, 1][c])
+#
+#     plt.scatter(centroids[:, 0], centroids[:, 1], color='black', marker='.')
+#     print(centroids_diffs)
+#     plt.show()
+#
+#
+# def k_means_img_compression(k_means_iter, num_iterations, centroids, image):
+#     datapoints = np.copy(image.reshape(-1, 3))
+#     _, clusters = k_means_iter(centroids, datapoints)
+#     for i in range(num_iterations):
+#         centroids, clusters = k_means_iter(centroids, datapoints)
+#
+#     for i in range(len(clusters)):
+#         datapoints[clusters[i]] = centroids[i]
+#     img_reconstructed = datapoints.reshape(image.shape)
+#     print(num_iterations)
+#     plt.imshow(image[:, :, [2, 1, 0]])
+#     plt.show()
+#     plt.imshow(img_reconstructed[:, :, [2, 1, 0]])
+#     plt.show()
