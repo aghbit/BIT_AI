@@ -49,3 +49,36 @@ Remember to acivate your Conda Environment before running the notebooks!
 source activate bit_ai
 jupyter-notebook
 ```
+
+## Building PDFs
+
+Jupyter Notebooks can be converted into various formats, such as $\LaTeX$ and PDF.
+
+For that purpose, `Makefile` has been provided. To build PDFs from notebooks, you will also need to [install LaTeX](https://www.latex-project.org/get/).
+
+### With Makefile
+To build pdfs of all notebooks:
+```bash
+make 
+```
+
+To build PDFs of only selected notebooks:
+
+```bash
+make KEY=<an element of the notebooks' path to be matched>
+```
+
+So, for example
+
+```bash
+make KEY=1_regression
+```
+
+will build PDFs of only the notebooks which contain `1_regression` in their path.
+
+### Using regular tools
+
+```bash
+jupyter nbconvert <notebook_path>.ipynb --execute --to latex 
+pdflatex <notebook_path>.tex
+```
