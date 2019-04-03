@@ -1,3 +1,5 @@
+Google Colaboratory link: https://colab.research.google.com/drive/1em2GBu4Gxbgt3OV79R9V2iwP6Yp8y3vx
+
 Instrukcja:
 
 Polecam zrobić to w Google Colaboratory, bo nie potrzebuje żadnego setup'u
