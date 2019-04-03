@@ -1,3 +1,4 @@
+prezentacja: https://docs.google.com/presentation/d/11ZLW6-dZs4MPXTg5G6XXPmKj06PuV__F3V4uS9QQfz4/edit#slide=id.p
 Google Colaboratory link: https://colab.research.google.com/drive/1em2GBu4Gxbgt3OV79R9V2iwP6Yp8y3vx
 
 Instrukcja:
