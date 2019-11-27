@@ -9,5 +9,5 @@ The notebooks are intended to compose an introductory Machine Learning course, t
 # Getting started
 
 Be sure to follow **the tutorial** provided in /0.basics/ folder or 
-**prezentation** https://twrdyyy.github.io/portfolio/git/basics/basics.html#/
+**presentation** https://twrdyyy.github.io/portfolio/git/basics/basics.html#/
 
