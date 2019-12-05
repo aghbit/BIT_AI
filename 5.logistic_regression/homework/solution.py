@@ -33,12 +33,6 @@ def loss(dY, Y, eps=1e-6):
     result *= -1
     return result
 
-
-def cost(predict, actual):
-    m = actual.shape[1]
-    cost__ = -np.sum(np.multiply(np.log(predict), actual) + np.multiply((1 - actual), np.log(1 - predict)))/m
-    return np.squeeze(cost__)
-
 def set_params(X, Y):
     input_size = X.shape[0] 
     output_size = Y.shape[0]
@@ -89,7 +83,7 @@ def fit(X, Y, learning_rate, epochs = 100):
     cost_ = []
     for _ in range(epochs):
         y, cache = forward_propagation(X, params)
-        costit = cost(y, Y)
+        costit = loss(y, Y)
         gradients = backward_propagation(X, Y, params, cache)
         params = update_parameters(gradients, params, learning_rate)
         cost_.append(costit)
